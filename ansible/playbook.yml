@@ -1,7 +1,13 @@
 ---
-- hosts: all
+- hosts: loadbalancer
   become: yes
   become_method: sudo
 
+
+- hosts: application
+  become: yes
+  become_method: sudo
+
+   
 
     
