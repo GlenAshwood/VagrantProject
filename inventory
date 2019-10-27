@@ -1,1 +1,0 @@
-config.vm.network 'private_network', ip: '192.168.56.10'

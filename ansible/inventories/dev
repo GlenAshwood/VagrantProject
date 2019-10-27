@@ -1,0 +1,5 @@
+[loadbalancer]
+192.168.30.21 ansible_user=vagrant ansible_ssh_pass=vagrant
+
+[application]
+192.168.30.2[2:3] ansible_user=vagrant ansible_ssh_pass=vagrant
