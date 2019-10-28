@@ -12,11 +12,10 @@ Vagrant.configure("2") do |config|
           ]
       end
 
-      config.vm.provision "ansible_local" do |ansible|
-        ansible.playbook = "ansible/playbook.yml"
+      loadbalancer.vm.provision "ansible_local" do |ansible|
+        ansible.playbook = "ansible/playbook-lb.yml"
         ansible.install_mode = "pip"
         ansible.compatibility_mode = "2.0"
-        ansible.inventory_path = "ansible/inventories/dev"
       end
 
       loadbalancer.vm.box = "puppetlabs/ubuntu-14.04-64-nocm"
@@ -38,11 +37,10 @@ Vagrant.configure("2") do |config|
             ]
         end
 
-        config.vm.provision "ansible_local" do |ansible|
-          ansible.playbook = "ansible/playbook.yml"
+        application.vm.provision "ansible_local" do |ansible|
+          ansible.playbook = "ansible/playbook-wa.yml"
           ansible.install_mode = "pip"
           ansible.compatibility_mode = "2.0"
-          ansible.inventory_path = "ansible/inventories/dev"
         end
 
         application.vm.box = "puppetlabs/ubuntu-14.04-64-nocm"

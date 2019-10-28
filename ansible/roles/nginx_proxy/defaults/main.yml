@@ -1,0 +1,6 @@
+---
+# defaults file for roles/nginx_proxy
+nginx_proxy:
+  package: nginx
+  service: nginx
+  port: 80
