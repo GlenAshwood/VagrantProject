@@ -1,4 +1,0 @@
----
-node:
-    version: '10.x'
-    webdir: '/opt/webapp'
