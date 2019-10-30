@@ -1,4 +1,4 @@
-<img src="vagrant.svg" align="right" />
+<img src="screenshoot1.png" align="centre" />
 
 # Load balanced vagrant setup with Ansible, NGINX and NodeJS.
 
@@ -54,8 +54,8 @@ application_2             running (virtualbox)
 loadbalancer              running (virtualbox)
 ```
 
-# Confirmation that everything has installed correctly 
-## Test website is being displayed correctly (Local Web Browser)
+# Confirmation that everything worked
+## Test access via Web Browser
 
 Test nginx loadbalancer is working:
 ```open http://192.168.30.10```
@@ -69,7 +69,7 @@ To test that Application_2 is working directly:
 > You may need to hard refresh if you do not see the 192.168.30.2x ip round robin
 
 ## SSH to VMs
-You can access each virtual machine with the following vagrant commands 
+You can also access each virtual machine with the following vagrant commands 
 ```bash 
 vagrant ssh loadbalancer
 vagrant ssh application_1
@@ -77,7 +77,7 @@ vagrant ssh application_2
 ```
 
 # Vagrant
-I wanted to make sure that this project only required minimum dependencies, so ansible_local was used as the main provisioner. 
+To make sure that this project only required minimum dependencies, ansible_local was used instead of deploying via the local host. 
 
 ## important Information
 ```
@@ -89,7 +89,7 @@ NodeJS Hosts:                 2
 Provider:                     virtualbox
 IP Range Used:                192.168.30.XX
 Main Provisioner:             ansible_local
-Testing:                       shell
+Testing:                      shell
 ```
 
 Config to provision two NodeJS application servers
@@ -165,24 +165,42 @@ Config to provision the Nginx loadbalancer
     loadbalancer.vm.synced_folder ".", "/vagrant"
   end  
 ```
+## Shell Provisoner - Test
+The shell provisioner was used to test that the Nginx servers was listening on port 80 and that both webservers were listening on port 3000
+
+```bash
+application_1: I am provisioning pm2 service...
+application_1: IP 192.168.30.21 is responding to HTTP Requests on port 3000
+```
+```bash
+application_2: I am provisioning pm2 service...
+application_2: IP 192.168.30.22 is responding to HTTP Requests on port 3000
+```
+```bash
+loadbalancer: I am provisioning nginx service....
+loadbalancer: tcp        0      0 192.168.30.10:80        0.0.0.0:*               LISTEN      7906/nginx      
+loadbalancer: Web services available via Loadbalancer
+```
+
 # Ansible
 
 ## Playbooks
 
 ### ansible/playbook-lb.yml #playbook for Nginx loadblancer
 ```
-Roles: nginx_proxy, security_update
-Host: all
-User: root
+Roles:    nginx_proxy, security_update
+Host:     loadbalancer
+User:     root
 ```
 
 ### ansible/playbook-wb.yml #playbook for NodeJS Machines
 ```
-Roles: nodesource.node, security_update
-Host: all
-User: root
+Roles:    nodesource.node, security_update
+Host:     application_1,application_2
+User:     root
 ```
 ## Roles
+
 ### ansible/roles/nginx_proxy
 This role was built using ansible-galaxy:
 ```
@@ -202,7 +220,7 @@ DEFAULTS
 - port: 80
 ```
 ### ansible/roles/nodesource.node
-[nodesource.node](https://github.com/nodesource/ansible-nodejs-role) was used as the base for this role. I tried to create my own tasks to install nodejs, but the only one that worked involved curl and it just felt clunky. I have indicated any changes that I have made. 
+[nodesource.node](https://github.com/nodesource/ansible-nodejs-role) was used as the base for this role. I tried to create my own tasks to install nodejs, but the only version that worked involved curl and it just felt clunky. I have indicated any changes that I have made. 
 ```
 ROLE:
 hosts: all
@@ -239,7 +257,7 @@ TASKS:
 ```
 
 # Nginx Details
-The Nginx setup is very simple and Ansible only basically installed the services and changes the default configuration file.
+The Nginx setup is very simple and only installs and runs the Nginx service and updates the default configuration file.
 ```
 IMPORTANT INF0:
 Remote config file location:  /etc/nginx/sites-available/default
@@ -270,7 +288,7 @@ server {
 (Famous last words) Due to its simple setup, I havent had any issues with the loadbalancer since getting the default configuration correct.
 
 # NodeJs Details
-I choose Node due to creating a few websites and applications last year and assumed I could pick it up again quite quickly. 
+Due to using NodeJS for a few personal projects in the past, it seemed liked the right choice for the web application in this project
 
 ## ROUTES
 ```
@@ -310,7 +328,7 @@ pm2 resurrect                             # Resurrect previously dumped processe
 ```
 
 ## Troubleshooting
-There shouldnt be any issues with the application servers unless you make changes to the app.js file or syntax errors. If you do update the app.js, you will need to restart PM2 to see those changes.
+There shouldnt be any issues with the application servers unless you make changes to the app.js file or have syntax errors. If you do update app.js, you will need to restart PM2 to see those changes.
 
 
 # Cleanup 
@@ -333,8 +351,9 @@ vagrant destroy loadbalancer -f   #destroy all machines, no prompt to confirm
 ## Roadmap
 - Added tasks to upgrade pre-installed software    # I didnt do this originally as I wanted to keep provisioning to a minimum
 - Replace hardcoding with varibles
+- Add API to landing page for dynamic content # I was going to do this, but didnt want to include the APIKey in the configure on git or have to create local varibles 
 - Ansible testing instead of shell provisioner
-- Update to allow scalling 
+- Update to allow scaling 
 - Https --> http routing
 - Add Screenshots
 
