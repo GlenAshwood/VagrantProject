@@ -1,6 +1,6 @@
 <img src="screenshoot1.png" align="centre" />
 
-#  NGINX Loadbalancer and NodeJ Webservices - Deployed using Vagrant and provisioned using ansible_local
+#  Nginx Loadbalancer and NodeJs Webservices - Deployed using Vagrant and provisioned using ansible_local
 
 
 ## Description
