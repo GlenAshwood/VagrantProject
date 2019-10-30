@@ -17,8 +17,6 @@ for (var k in interfaces) {
     }
 }
 
-console.log(addresses);
-
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
@@ -30,7 +28,7 @@ app.get("/", function(req, res){
 });
 
 app.get("/test", function(req, res){
-    res.send("IP " + addresses[1] + " Is responding to HTTP Requests");
+    res.send("IP " + addresses[1] + " is responding to HTTP Requests on port " + port);
 });
 
 app.listen(port, function() {
