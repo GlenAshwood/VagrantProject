@@ -1,4 +1,7 @@
+<img src="vagrant.svg" align="right" />
+
 # Load balanced vagrant setup with Ansible, NGINX and NodeJS.
+
 
 ## Description
 Vagrant Project to deploy three servers and configure each on via the ansible_local provisioner. The Vagrantfile will create the following machines:
@@ -51,7 +54,7 @@ application_2             running (virtualbox)
 loadbalancer              running (virtualbox)
 ```
 
-## Testing that the application has deployed correctly 
+## Confirmation that everything has installed correctly   
 
 To test that the nginx loadbalancer machine is working, you can open the following link via your local browser:
 ```open http://192.168.30.10```
@@ -69,6 +72,10 @@ vagrant ssh loadbalancer
 vagrant ssh application_1
 vagrant ssh application_2
 ```
+
+# Ansible
+## Roles
+
 
 ## Nginx Details
 
@@ -91,3 +98,4 @@ To destroy your Environment or Virtual machine(s)
 vagrant destroy -f                #destroy all machines, no prompt to confirm
 vagrant destroy loadbalancer -f   #destroy all machines, no prompt to confirm
 ```
+## Roadmap
