@@ -4,7 +4,7 @@
   become_user: root
   become_method: sudo
   roles:
-    - security-update
+    - security_update
     - nodesource.node
 
    

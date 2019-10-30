@@ -44,7 +44,7 @@
     state: present
     update_cache: yes
 
-- name: Install packages based on package.json.
+- name: Install packages based on package.json
   npm:
     path: "{{app_dir}}"
 
@@ -55,7 +55,12 @@
     state: present
   notify: start pm2
 
-- name: resurrect pm2
+- name: Save pm2 processes
+  command: pm2 save
+  args:
+    chdir: "{{app_dir}}" 
+
+- name: Resurrect pm2
   command: pm2 resurrect
   args:
     chdir: "{{app_dir}}" 

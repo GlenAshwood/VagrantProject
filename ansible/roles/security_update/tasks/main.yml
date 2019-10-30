@@ -7,11 +7,11 @@
     regexp: '^%admin'
     line: '%admin ALL=(ALL) ALL'
 
-- name: check vagrant is in sudoers
+- name: Check vagrant user is in sudoers
   shell: grep -q ^vagrant /etc/sudoers; echo $?
   register: result
 
-- name: add vagrant user to sudoers
+- name: Add vagrant user to sudoers and set to NOPASSWD
   shell: |
     echo "vagrant ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
   when: result.stdout != "0"
