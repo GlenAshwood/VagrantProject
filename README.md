@@ -4,7 +4,7 @@
 
 
 ## Description
-Vagrant project that deploys 2 NodeJS servers and uses a nginx loadbalancer to handle requests. All three machines are provisioned using ansible_local. 
+A Vagrant project that deploys 2 NodeJS servers and uses a nginx loadbalancer to handle requests. All three machines are provisioned using ansible_local. 
 
 - Loadblancer         
 ```
@@ -331,9 +331,10 @@ vagrant destroy -f                #destroy all machines, no prompt to confirm
 vagrant destroy loadbalancer -f   #destroy all machines, no prompt to confirm
 ```
 ## Roadmap
-- added tasks to upgrade pre-installed software    # I didnt do this originally as I wanted to keep provisioning to a minimum
+- Added tasks to upgrade pre-installed software    # I didnt do this originally as I wanted to keep provisioning to a minimum
 - Replace hardcoding with varibles
 - Ansible testing instead of shell provisioner
-- update to allow scalling 
-- https --> http routing
+- Update to allow scalling 
+- Https --> http routing
+- Add Screenshots
 
