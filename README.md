@@ -1,10 +1,10 @@
 <img src="screenshoot1.png" align="centre" />
 
-# Load balanced vagrant setup with Ansible, NGINX and NodeJS.
+#  NGINX Loadbalancer and NodeJ Webservices - Deployed using Vagrant and provisioned using ansible_local
 
 
 ## Description
-A Vagrant project that deploys 2 NodeJS servers and uses a nginx loadbalancer to handle requests. All three machines are provisioned using ansible_local. 
+A Vagrant project that deploys 2 NodeJS web servers and a nginx loadbalancer to handle requests. All three machines are provisioned using ansible_local. 
 
 - Loadblancer         
 ```
