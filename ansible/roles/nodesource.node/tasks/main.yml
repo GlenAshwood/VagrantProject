@@ -44,13 +44,19 @@
     state: present
     update_cache: yes
 
+- name: Install packages based on package.json.
+  npm:
+    path: "{{app_dir}}"
+
 - name: Install PM2 package
   npm:
     name: pm2
     global: yes
     state: present
+  notify: start pm2
 
-- name: start pm2
-  command: pm2 start app.js --name webapp --watch
+- name: resurrect pm2
+  command: pm2 resurrect
   args:
-    chdir: "{{app_dir}}"
+    chdir: "{{app_dir}}" 
+

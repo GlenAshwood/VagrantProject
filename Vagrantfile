@@ -1,5 +1,8 @@
 Vagrant.configure("2") do |config|  
   
+  config.vm.box = "puppetlabs/ubuntu-14.04-64-nocm"
+  config.ssh.forward_agent = true
+  
   config.vm.define :loadbalancer do |loadbalancer|
       loadbalancer.vm.provider :virtualbox do |v|
           v.name = "loadbalancer"
@@ -18,7 +21,10 @@ Vagrant.configure("2") do |config|
         ansible.compatibility_mode = "2.0"
       end
 
-      loadbalancer.vm.box = "puppetlabs/ubuntu-14.04-64-nocm"
+      loadbalancer.vm.provision "shell", 
+        inline: "netstat -anp tcp | grep :80"
+    
+
       loadbalancer.vm.network :private_network, ip: "192.168.30.10"
       loadbalancer.ssh.forward_agent = true
       loadbalancer.vm.synced_folder ".", "/vagrant"
@@ -43,7 +49,6 @@ Vagrant.configure("2") do |config|
           ansible.compatibility_mode = "2.0"
         end
 
-        application.vm.box = "puppetlabs/ubuntu-14.04-64-nocm"
         application.vm.network :private_network, ip: "192.168.30.2#{i}"
         application.ssh.forward_agent = true
         application.vm.synced_folder ".", "/vagrant"

@@ -1,2 +1,6 @@
 ---
 # handlers file for nodejs
+- name: start pm2
+  command: pm2 start app.js --name webapp --watch -f
+  args:
+    chdir: "{{app_dir}}"
