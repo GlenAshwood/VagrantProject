@@ -1,0 +1,17 @@
+---
+# tasks file for security-update
+- name: Check that 'admin' group do not have passwordless sudo
+  lineinfile:
+    dest: /etc/sudoers
+    state: present
+    regexp: '^%admin'
+    line: '%admin ALL=(ALL) ALL'
+
+- name: check vagrant is in sudoers
+  shell: grep -q ^vagrant /etc/sudoers; echo $?
+  register: result
+
+- name: add vagrant user to sudoers
+  shell: |
+    echo "vagrant ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+  when: result.stdout != "0"
