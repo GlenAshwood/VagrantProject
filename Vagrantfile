@@ -28,7 +28,7 @@ Vagrant.configure("2") do |config|
       #Shell provisioner test section - is the webapp available on port 3000
       application.vm.provision "shell", 
         inline: <<-Script
-        echo I am provisioning pm2 service...; sleep 5
+        echo I am provisioning the pm2 service...; sleep 5
         curl -s http://192.168.30.2#{i}:3000/test
         Script
 
@@ -62,7 +62,7 @@ Vagrant.configure("2") do |config|
     #Shell provisioner test section - is nginx runnung and is it serving traffic 
     loadbalancer.vm.provision "shell", 
       inline: <<-Script
-      echo I am provisioning nginx service....; sleep 5
+      echo I am provisioning the nginx service....; sleep 5
       netstat -anp tcp | grep 192.168.30.10:80
       curl -s http://192.168.30.10/lbtest
       Script
