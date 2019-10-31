@@ -26,12 +26,12 @@ PORT: 3000
 ```
 
 ## Dependencies
-- [Vagrant](https://www.vagrantup.com/downloads.html)
-- [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
+- [Vagrant](https://www.vagrantup.com/downloads.html) - Version used (2.6.6)
+- [VirtualBox](https://www.virtualbox.org/wiki/Downloads) - Version used (6.0.14)
 
 ## Optional
 You can also install Ansible on your local machine, but it isnt required for this deployment
-- [Ansible](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html)
+- [Ansible](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html) - Version used
 
 ## Vagrant box used as base image
 [ubuntu-14.04-64-nocm](https://vagrantcloud.com/puppetlabs/boxes/ubuntu-14.04-64-nocm)
