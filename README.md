@@ -234,10 +234,10 @@ TASKS:
 - Add NodeSource deb-src repository
 - Add NodeSource repository preference
 - Install Node.js
-- Install packages based on package.json    # This was a new task added by me. I may add modules_modules to .gitignore and install directly to the the remote host in future
+- Install packages based on package.json    # This was a new task added by me. I may add node_modules to .gitignore and install directly to the the remote host in future
 - Install PM2 package                       # This was a new task added by me. I prefer this to the default node deamon
-- Save pm2 processes                        # This was a new task added by me. I had issues with PM2 not starting after a halt, so this brings up the saved session
-- Resurrect pm2 processes                   # This was a new task added by me. I had issues with PM2 not starting after a halt, so this brings up the saved processes
+- Save pm2 processes                        # This was a new task added by me. I had issues with PM2 not starting after a halt, so this task saves/dumps running processes
+- Resurrect pm2 processes                   # This was a new task added by me. I had issues with PM2 not starting after a halt, so this task brings up the saved processes
 
 HANDLERS
 - restart start pm2                         # This was a new task added by me
@@ -263,6 +263,7 @@ IMPORTANT INF0:
 Remote config file location:  /etc/nginx/sites-available/default
 Local config file location:   ./ansible/roles/nginx_proxy/templates/default.tpl
 ```
+Default.tpl file - static IPs at the moment, but will look into dynamic addressing 
 ```
 upstream nodejs {
     # List of Node.JS Application Servers
@@ -288,13 +289,13 @@ server {
 (Famous last words) Due to its simple setup, I havent had any issues with the loadbalancer since getting the default configuration correct.
 
 # NodeJs Details
-Due to using NodeJS for a few personal projects in the past, it seemed liked the right choice for the web application in this project
+Due to using NodeJS for a few personal projects, it seemed liked the right choice for the web applications in this project
 
 ## ROUTES
 ```
 /         # Default - Returns landing.ejs page located in webapp/views/
 /test     # Returns a test page for localhost testing via the Shell Provisioner
-/lbtest   # Returns a test page for Loadbalanvcer testing via the Shell Provisioner
+/lbtest   # Returns a test page for Loadbalancer testing via the Shell Provisioner
 ```
 ## LANDING PAGE (Main page)
 ```
@@ -302,7 +303,7 @@ Type:                  Embedded JavaScript template
 Remote file location:  /opt/webapp/views/landing.ejs 
 Local file location:  ./webapp/views/landing.ejs
 ```
-Once fully deployed, you are able to make dynamic changes to the landing page and see them by refreshing your web browser
+Once fully deployed, you are able to make dynamic changes to the landing page and see them by refreshing your web browser. I have highlighted within the HTML body where you can add your own code to test.
 ```
 <!-- You can add extra text between the <h3> and </h3> below to see the automatic update when refreshed-->
 <h3> </h3>
@@ -313,8 +314,8 @@ Once fully deployed, you are able to make dynamic changes to the landing page an
 I used [PM2](https://pm2.keymetrics.io/) instead of node, as it gives you a lot more options, some of which can be seen below
 ```
 IMPORTANT INF0:
-Run as:  Root # sudo -i to see the running PM2 Service
-Webapp location: /opt/webapp/
+Run as:           Root # use sudo -i to see the running PM2 Service
+Webapp location:  /opt/webapp/
 ```
 
 ### Commands used for this project
@@ -322,7 +323,7 @@ Webapp location: /opt/webapp/
 pm2 start app.js --name webapp --watch -f # Starts the application, names it 'webapp' and watch root directory
 pm2 Status                                # Status of running processes
 pm2 stop webapp                           # Stop webapp service
-pm2 start webapp                          # Restart webapp service
+pm2 start webapp                          # Restart the webapp service
 pm2 save                                  # Dump all processes for resurrecting them later
 pm2 resurrect                             # Resurrect previously dumped processes
 ```
@@ -349,11 +350,11 @@ vagrant destroy -f                #destroy all machines, no prompt to confirm
 vagrant destroy loadbalancer -f   #destroy all machines, no prompt to confirm
 ```
 ## Roadmap
-- Added tasks to upgrade pre-installed software    # I didnt do this originally as I wanted to keep provisioning to a minimum
+- Add tasks to upgrade pre-installed software    # I didnt do this originally as I wanted to keep provisioning times to a minimum.
 - Replace hardcoding with varibles
-- Add API to landing page for dynamic content # I was going to do this, but didnt want to include the APIKey in the configure on git or have to create local varibles 
-- Ansible testing instead of shell provisioner
-- Update to allow scaling 
+- Add API to landing page for dynamic content    # I was going to do this, but didnt want to include the APIKey in the configure on git or have to create local varibles.
+- Ansible testing instead of shell provisioner   # I want to use both the shell and ansible provisioning, but I think ansible makes more sense for future projects
+- Update code to allow scaling beyond 2 app servers
 - Https --> http routing
 - Add Screenshots
 
