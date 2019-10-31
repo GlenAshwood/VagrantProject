@@ -291,6 +291,13 @@ server {
 # NodeJs Details
 Due to using NodeJS for a few personal projects, it seemed liked the right choice for the web applications in this project
 
+## App.js - main control file
+```
+Remote file location:  /opt/webapp/app.js
+Local file location:   ./webapp/app.js
+Start process:         pm2 start app.js --name webapp --watch -f
+```
+
 ## ROUTES
 ```
 /         # Default - Returns landing.ejs page located in webapp/views/
