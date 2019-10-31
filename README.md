@@ -1,10 +1,10 @@
 <img src="screenshoot1.png" align="centre" />
 
-#  Nginx Loadbalancer and NodeJs Webservices - Deployed using Vagrant and provisioned using ansible_local
+#  Nginx Loadbalancer and Node.js Webservices - Deployed using Vagrant and provisioned using ansible_local
 
 
 ## Description
-A Vagrant project that deploys 2 NodeJS web servers and a nginx loadbalancer to handle requests. All three machines are provisioned using ansible_local. 
+A Vagrant project that deploys 2 Node.js web servers and a nginx loadbalancer to handle requests. All three machines are provisioned using ansible_local. 
 
 - Loadblancer         
 ```
@@ -14,13 +14,13 @@ PORT: 80
 ```
 - Application_1       
 ```
-Application: Nodejs
+Application: Node.js
 IP: 192.168.30.21
 PORT: 3000
 ```
 - Application_2
 ```
-Application: Nodejs
+Application: Node.js
 IP:   192.168.30.22
 PORT: 3000
 ```
@@ -193,7 +193,7 @@ Host:     loadbalancer
 User:     root
 ```
 
-### ansible/playbook-wb.yml #playbook for NodeJS Machines
+### ansible/playbook-wb.yml #playbook for Node.js Machines
 ```
 Roles:    nodesource.node, security_update
 Host:     application_1,application_2
@@ -288,8 +288,8 @@ server {
 ## Troubleshooting
 (Famous last words) Due to its simple setup, I havent had any issues with the loadbalancer since getting the default configuration correct.
 
-# NodeJs Details
-Due to using NodeJS for a few personal projects, it seemed liked the right choice for the web applications in this project
+# Node.js Details
+Due to using Node.js for a few personal projects, it seemed liked the right choice for the web applications in this project
 
 ## App.js - main control file
 ```
