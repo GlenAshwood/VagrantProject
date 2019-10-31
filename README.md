@@ -360,7 +360,7 @@ vagrant destroy loadbalancer -f   #destroy all machines, no prompt to confirm
 ```
 - Add tasks to upgrade pre-installed software    # I didnt do this originally as I wanted to keep provisioning times to a minimum.
 - Replace hardcoding with varibles
-- Add API to landing page for dynamic content    # I was going to do this, but didnt want to include the APIKey in the configure on git or have to create local varibles.
+- Add API to landing page for dynamic content    # I was going to do this, but didnt want to include the APIKey in the configuration on git or have to create local varibles outside of the deployment.
 - Ansible testing instead of shell provisioner   # I want to use both the shell and ansible provisioning, but I think ansible makes more sense for future projects
 - Update code to allow scaling beyond 2 app servers
 - Https --> http routing
