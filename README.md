@@ -28,6 +28,7 @@ PORT: 3000
 ## Dependencies
 - [Vagrant](https://www.vagrantup.com/downloads.html) - Version used (2.6.6)
 - [VirtualBox](https://www.virtualbox.org/wiki/Downloads) - Version used (6.0.14)
+> If you are running this project from a Windows machine, you will need to [diasble hyper-v ](https://ugetfix.com/ask/how-to-disable-hyper-v-in-windows-10)
 
 ## Optional
 You can also install Ansible on your local machine, but it isnt required for this deployment
@@ -41,6 +42,7 @@ Install both dependencies and clone this repositories to your local host. The on
 ```bash
 vagrant up
 ```
+
 Once the installation has completed (and it isn't quick, so plenty of time to make a tea/coffee), you should have provisioned three machines. To vefiy this, you can run the following command:
 ```bash
 vagrant status
