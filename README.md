@@ -38,12 +38,12 @@ You can also install Ansible on your local machine, but it isnt required for thi
 [ubuntu-14.04-64-nocm](https://vagrantcloud.com/puppetlabs/boxes/ubuntu-14.04-64-nocm)
 
 # Installation
-Install both dependencies and clone this repositories to your local host. The only command you should need to run from the root directory is:
+Install both dependencies and clone this repo to your local host. The only command you should need to run from the root directory is:
 ```bash
 vagrant up
 ```
 
-Once the installation has completed (and it isn't quick, so plenty of time to make a tea/coffee), you should have provisioned three machines. To vefiy this, you can run the following command:
+Once the installation is complete (and it isn't quick, so plenty of time to make a tea/coffee), you should have provisioned three machines. To vefiy this, you can run the following command:
 ```bash
 vagrant status
 ```
